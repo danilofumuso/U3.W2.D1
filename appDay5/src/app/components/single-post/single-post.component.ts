@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { iPost } from '../../interfaces/ipost';
 
 @Component({
@@ -7,7 +7,12 @@ import { iPost } from '../../interfaces/ipost';
   styleUrl: './single-post.component.scss',
 })
 export class SinglePostComponent {
-  @Input() posts: iPost[] = [];
+  @Input() post!: iPost;
 
-  // @ContentChild('form') ref!: ElementRef;
+  formActive: string = 'active';
+  @Output() onClick = new EventEmitter<string>();
+
+  sendData() {
+    this.onClick.emit(this.formActive);
+  }
 }

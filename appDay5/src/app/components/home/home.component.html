@@ -2,20 +2,7 @@
 <div class="container" *ngIf="posts[indexRandom]">
   <div class="row justify-content-center">
     <div class="col col-6">
-      <div class="card mt-5">
-        <div class="card-body">
-          <h5 class="card-title">{{ posts[indexRandom].title }}</h5>
-          <p class="card-text">
-            {{ posts[indexRandom].body }}
-          </p>
-          <p *ngFor="let tag of posts[indexRandom].tags">{{ tag }}</p>
-          <a
-            [routerLink]="['/post-details', posts[indexRandom].id]"
-            class="btn btn-outline-primary"
-            >Details</a
-          >
-        </div>
-      </div>
+      <app-single-post [post]="posts[indexRandom]"> </app-single-post>
     </div>
   </div>
 </div>
@@ -24,31 +11,39 @@
   <div class="row">
     <h3 class="text-center mt-5">Potrebbero piacerti questi post</h3>
     <div class="col col-3" *ngFor="let post of shuffledPosts.slice(0, 4)">
-      <div class="card mt-5">
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title }}</h5>
-          <p class="card-text">{{ post.body }}</p>
-          <p *ngFor="let tag of post.tags">{{ tag }}</p>
-          <a
-            [routerLink]="['/post-details', post.id]"
-            class="btn btn-outline-primary"
-            >Details</a
-          >
-        </div>
-      </div>
+      <app-single-post [post]="post"> </app-single-post>
     </div>
   </div>
 </div>
 
-<app-single-post [posts]="posts">
-  <form #form>
-    <div class="mb-3">
-      <label for="postTitle" class="form-label">Title</label>
-      <input type="text" class="form-control" id="postTitle" />
+<div class="container">
+  <div class="row">
+    <h3 class="text-center mt-5">Single Post</h3>
+    <div class="col col-3" *ngFor="let post of posts">
+      <app-single-post [post]="post">
+        <form class="mt-3" (onClick)="handleData($event)">
+          <div class="mb-3">
+            <label for="postTitle" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="postTitle"
+              name="title"
+              [(ngModel)]="post.title"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="postBody" class="form-label">Post Body</label>
+            <input
+              type="text-area"
+              class="form-control"
+              id="postBody"
+              name="body"
+              [(ngModel)]="post.body"
+            />
+          </div>
+        </form>
+      </app-single-post>
     </div>
-    <div class="mb-3">
-      <label for="postBody" class="form-label">Post Body</label>
-      <input type="text" class="form-control" id="postBody" />
-    </div>
-  </form>
-</app-single-post>
+  </div>
+</div>
