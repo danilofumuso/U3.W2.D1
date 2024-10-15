@@ -9,10 +9,9 @@ import { iPost } from '../../interfaces/ipost';
 export class SinglePostComponent {
   @Input() post!: iPost;
 
-  formActive: string = 'active';
-  @Output() onClick = new EventEmitter<string>();
+  formActive: boolean = false;
 
-  sendData() {
-    this.onClick.emit(this.formActive);
+  formActivation() {
+    this.formActive = true;
   }
 }

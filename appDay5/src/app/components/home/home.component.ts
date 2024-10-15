@@ -271,8 +271,4 @@ export class HomeComponent implements OnInit {
     this.shuffledPosts = structuredClone(this.posts); //creo una deep copy dell'array posts e poi faccio lo shuffle sull'array shuffledPosts!
     this.shuffledPosts = shuffle(this.shuffledPosts);
   }
-
-  handleData(event: any) {
-    event = !event;
-  }
 }
